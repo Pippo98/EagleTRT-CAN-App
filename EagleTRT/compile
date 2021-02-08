@@ -1,0 +1,6 @@
+cd build
+qmake ../EagleTRT.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
+make -f ../Makefile qmake_all
+make -j8
+
+./EagleTRT
