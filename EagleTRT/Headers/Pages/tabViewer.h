@@ -108,14 +108,14 @@ signals:
 
 private:
 
-    // void handleFileOpen();
+    QVector<QString> colors;
 
     void print(QString message);
     void clearDebug();
 
     // My veichle datastruct
     Fenice mFenice;
-    Chimera mChimera;
+    Chimera* mChimera;
 
     Parser* mParser;
     Worker* mWorker;

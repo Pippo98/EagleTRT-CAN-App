@@ -2,9 +2,11 @@
 
 #include <QtConcurrent/QtConcurrent>
 #include <QApplication>
+#include <QColumnView>
 #include <QDateTime>
 #include <QFuture>
 #include <QMessageBox>
+#include <QTableWidget>
 #include <QTimer>
 #include <random>
 #include <thread>
@@ -14,8 +16,24 @@ TabViewer::TabViewer(QWidget* tab)
     this->mTab = tab;
     mParser = new Parser();
 
-    mWorker = new Worker(mParser, &mChimera);
+    mChimera = new Chimera();
+
+    mWorker = new Worker(mParser, mChimera);
     th1 = new QThread;
+
+    colors = QVector<QString>{
+        "rgb(49, 201, 113)",
+        "rgb(208, 9, 95)",
+        "rgb(187, 79, 130)",
+        "rgb(136, 172, 226)",
+        "rgb(189, 235, 49)",
+        "rgb(222, 113, 23)",
+        "rgb(170, 124, 180)",
+        "rgb(247, 176, 45)",
+        "rgb(33, 48, 194)",
+        "rgb(25, 190, 117)",
+        "rgb(56, 127, 194)",
+    };
 }
 
 TabViewer::~TabViewer(){
@@ -65,9 +83,16 @@ void TabViewer::makeConnections(){
     auto rawDataList = mTab->findChild<QListWidget*>("rawData");
     if(rawDataList == 0)
         failValue = 4;
+//    auto dataText = mTab->findChild<QTextEdit*>("Data");
+//    if(rawDataList == 0)
+//        failValue = 5;
+    auto table = mTab->findChild<QTableWidget*>("tableWidget");
+    if(table == 0)
+        failValue = 5;
 
     if(failValue != -1){
         print("failed on making connection of " + QString(failValue));
+        qDebug() << ("failed on making connection of " + QString(failValue));
     }
 
     // push button to select action
@@ -89,13 +114,14 @@ void TabViewer::makeConnections(){
     connections << connect(slider, &QSlider::sliderMoved, this, &TabViewer::userChangedSlider);
     connections << connect(this, &TabViewer::setPercentage, mWorker, &Worker::changePercentage);
 
-    connections << connect(mWorker, &Worker::rawDataUpdated, this, &TabViewer::rawDataUpdated);
 
     // Worker, used to parse the selected log file
     connections << connect(mWorker, &Worker::updated, this, &TabViewer::chimeraUpdated);
     connections << connect(this, &TabViewer::kill, mWorker, &Worker::stop);
     connections << connect(this, &TabViewer::pause, mWorker, &Worker::pause);
     connections << connect(this, &TabViewer::togglePause, mWorker, &Worker::togglePause);
+
+    connections << connect(mWorker, &Worker::rawDataUpdated, this, &TabViewer::rawDataUpdated);
 
     print("Done");
 }
@@ -209,6 +235,8 @@ void TabViewer::treeClicked(const QModelIndex& idx){
 
 void TabViewer::chimeraUpdated(){
 
+    int colored = 1;
+
     string separator = "\t";
     vector<string> sensorLines;
     vector<int> sensorLinesColors;
@@ -217,20 +245,70 @@ void TabViewer::chimeraUpdated(){
     if(textField == 0)
         return;
 
-    sensorLines.push_back(mChimera.accel->getString(separator));
-    sensorLines.push_back(mChimera.gyro->getString(separator));
-    sensorLines.push_back(mChimera.invl->getString(separator));
-    sensorLines.push_back(mChimera.invr->getString(separator));
-    sensorLines.push_back(mChimera.BMSHV->getString(separator));
-    sensorLines.push_back(mChimera.BMSLV->getString(separator));
-    sensorLines.push_back(mChimera.pedals->getString(separator));
-    sensorLines.push_back(mChimera.steer->getString(separator));
-    sensorLines.push_back(mChimera.encl->getString(separator));
-    sensorLines.push_back(mChimera.encr->getString(separator));
-    sensorLines.push_back(mChimera.ecu->getString(separator));
+    auto table = mTab->findChild<QTableWidget*>("tableWidget");
+    if(table == 0)
+        return;
+
+    sensorLines.push_back(mChimera->accel->getString(separator));
+    sensorLines.push_back(mChimera->gyro->getString(separator));
+    sensorLines.push_back(mChimera->invl->getString(separator));
+    sensorLines.push_back(mChimera->invr->getString(separator));
+    sensorLines.push_back(mChimera->BMSHV->getString(separator));
+    sensorLines.push_back(mChimera->BMSLV->getString(separator));
+    sensorLines.push_back(mChimera->pedals->getString(separator));
+    sensorLines.push_back(mChimera->steer->getString(separator));
+    sensorLines.push_back(mChimera->encl->getString(separator));
+    sensorLines.push_back(mChimera->encr->getString(separator));
+    sensorLines.push_back(mChimera->ecu->getString(separator));
+
+    separator = "\n";
+
+    table->setColumnCount(11);
+    table->setRowCount(1);
+    table->setItem(0, 0, new QTableWidgetItem(mChimera->accel->getString(separator).c_str()));
+    table->setItem(0, 1, new QTableWidgetItem(mChimera->gyro->getString(separator).c_str()));
+    table->setItem(0, 2, new QTableWidgetItem(mChimera->invl->getString(separator).c_str()));
+    table->setItem(0, 3, new QTableWidgetItem(mChimera->invr->getString(separator).c_str()));
+    table->setItem(0, 4, new QTableWidgetItem(mChimera->BMSHV->getString(separator).c_str()));
+    table->setItem(0, 5, new QTableWidgetItem(mChimera->BMSLV->getString(separator).c_str()));
+    table->setItem(0, 6, new QTableWidgetItem(mChimera->pedals->getString(separator).c_str()));
+    table->setItem(0, 7, new QTableWidgetItem(mChimera->steer->getString(separator).c_str()));
+    table->setItem(0, 8, new QTableWidgetItem(mChimera->encl->getString(separator).c_str()));
+    table->setItem(0, 9, new QTableWidgetItem(mChimera->encr->getString(separator).c_str()));
+    table->setItem(0, 10, new QTableWidgetItem(mChimera->ecu->getString(separator).c_str()));
+
+    table->resizeRowsToContents();
+
+
+    if(colored == 1){
+
+        sensorLinesColors.push_back(mChimera->accel->id);
+        sensorLinesColors.push_back(mChimera->gyro->id);
+        sensorLinesColors.push_back(mChimera->invl->id);
+        sensorLinesColors.push_back(mChimera->invr->id);
+        sensorLinesColors.push_back(mChimera->BMSHV->id);
+        sensorLinesColors.push_back(mChimera->BMSLV->id);
+        sensorLinesColors.push_back(mChimera->pedals->id);
+        sensorLinesColors.push_back(mChimera->steer->id);
+        sensorLinesColors.push_back(mChimera->encl->id);
+        sensorLinesColors.push_back(mChimera->encr->id);
+        sensorLinesColors.push_back(mChimera->ecu->id);
+
+        QString fontTagStart = "<font style=\"color:";
+        QString fontTagEnd = ";\">";
+        QString fontClose = "</font>";
+        for(uint8_t i(0); i < sensorLines.size();i++){
+            QString s(sensorLines[i].c_str());
+            QString color = colors.at(sensorLinesColors[i]%colors.size());
+            s = fontTagStart + color + fontTagEnd + s + fontClose + "<br>";
+            sensorLines[i] = s.toStdString();
+        }
+    }
+
 
     string joined = boost::algorithm::join(sensorLines, "\n");
-    textField->setText(QString(joined.c_str()));
+    joined = "<p style=\"font-size:17px\">" + joined + "</p>";
+    textField->setHtml(QString(joined.c_str()));
 }
 
 void TabViewer::rawDataUpdated(QStringList data){
@@ -241,7 +319,10 @@ void TabViewer::rawDataUpdated(QStringList data){
     listView->clear();
     listView->addItems(data);
 }
-
+/*
+ * get the detail of the message from the list of raw messages
+ * display the full message descriprion in case the message is known
+*/
 void TabViewer::rawItemClicked(QListWidgetItem* item){
     qDebug() << item->text();
     double timestamp;
@@ -249,16 +330,24 @@ void TabViewer::rawItemClicked(QListWidgetItem* item){
     vector<int> payload;
     payload = mParser->splitMessage(&timestamp, &id, item->text().toStdString().c_str());
 
-    Chimera tempChimera;
-    int modified = mParser->parseChimeraMessage(timestamp, id, payload, &tempChimera);
+    Chimera* tempChimera = new Chimera();
+    int modified = mParser->parseChimeraMessage(timestamp, id, payload, tempChimera);
     QMessageBox* msg = new QMessageBox();
     msg->setWindowTitle("Message Detail");
     if(modified == -1){
-        msg->setText("ID unknown");
+        msg->setText("Message Unknown");
         msg->open();
     }else{
-
+        string separator = "\n";
+        string ret = tempChimera->getFullStringOfID(modified, separator);
+        ret = "Shown the whole structure, is possible that some fields are shown but are not contained in the message\n\n" + ret;
+        msg->setText(QString(ret.c_str()));
+        msg->setStyleSheet("background-color: " + colors[modified] + ";");
+        msg->open();
     }
+
+    stringstream s = mChimera->serialize(Text);
+    cout << s.str() << endl;
 
 }
 void TabViewer::percentageUpdated(float value){
@@ -360,6 +449,10 @@ void Worker::togglePause(){
 
 void Worker::changePercentage(float value){
     currentLine = (int)((value/100)*(lineCount-1));
+    if(currentLine < 0)
+        currentLine = 0;
+    if(currentLine > lineCount-1)
+        currentLine = lineCount -1;
 }
 
 void Worker::run(){
@@ -368,25 +461,28 @@ void Worker::run(){
 
     auto lines = getFileLines(mFileName);
 
-    chrono::_V2::steady_clock::time_point sTime;
+    // used to check if emitting an update is neccessary
+    chrono::_V2::steady_clock::time_point timer1;   // updated()
+    chrono::_V2::steady_clock::time_point timer2;   // rawDataUpdated()
+    chrono::_V2::steady_clock::time_point cycleTimer;
 
-    // times to playback the log with right speed
-    double currentTime = getNowSec();
-    double logTime = -1;
-
-    int startLine = 20;
+    int HEADER_LINES = 20;
+    for (int i = 0; i < HEADER_LINES; i++)
+        lines.removeFirst();
 
     // to show percentage
     lineCount = lines.count();
     // to send line parsed from the prevuois update
     QStringList rawData;
     double prevLogTimestamp = -1;
-    startT(&sTime);
-    for(currentLine = startLine; currentLine < lineCount && runState != -1; currentLine++){
+    startT(&timer1);
+    startT(&timer2);
+    startT(&cycleTimer);
+    for(currentLine = 0; currentLine < lineCount && runState != -1; currentLine++){
         while(runState == 0){
             // Wait for 10ms, increment the current time
             usleep(10000);
-            currentTime += 0.01;
+            startT(&cycleTimer);
         }
 
         QString line = lines[currentLine];
@@ -403,43 +499,34 @@ void Worker::run(){
 
         rawData.push_back(line);
 
-        if(currentLine > startLine){
-            mParser->getTimestamp(&prevLogTimestamp, lines[currentLine-1].toStdString());
-        }
-        else{
+        if(currentLine == 0){
             prevLogTimestamp = timestamp;
         }
-        qDebug() << prevLogTimestamp << timestamp;
+        else{
+            mParser->getTimestamp(&prevLogTimestamp, lines[currentLine-1].toStdString());
+        }
         double DT = timestamp - prevLogTimestamp;
-        qDebug() << DT;
+        DT = DT - endT(&cycleTimer);
 
-        usleep(DT*10e5);
-
-        // setting the initial time
-        if(logTime == -1)
-          logTime = timestamp;
-
-//        // check the current time with te log time
-//        // wait if faster
-//        // jump lines if slower
-//        double currentDT = getNowSec() - currentTime;
-//        double logDT = (double)timestamp - (double)logTime;
-//        if(currentDT > logDT)
-//          usleep(0);    // should jump some lines because of slow cycles
-//        else
-//          usleep((logDT - currentDT )*1000000);
+        if(DT < 0){
+            // fuck
+        }
+        else {
+            usleep(DT*10e5);
+        }
+        startT(&cycleTimer);
 
         if(modified == -1)
             continue;
 
-        if(endT(&sTime) > 0.02){
-
+        if(endT(&timer1) > 0.02){
             emit updated();
-            emit rawDataUpdated(rawData);
             emit percentageUpdated(((float)currentLine/lineCount)*100);
-
+        }
+        if(endT(&timer2) > 0.5){
+            emit rawDataUpdated(rawData);
             rawData.clear();
-            startT(&sTime);
+            startT(&timer2);
         }
     }
     runState = -1;

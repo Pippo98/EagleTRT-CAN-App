@@ -37,10 +37,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = EagleTRT1.0.0
-DISTDIR = /media/filippo/label/Codes/QT/two/EagleTRT/.tmp/EagleTRT1.0.0
+DISTDIR = /media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/.tmp/EagleTRT1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread   
+LIBS          = $(SUBLIBS) -lboost_serialization -L/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -838,6 +838,9 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qicon.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -845,8 +848,6 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -864,6 +865,10 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -872,12 +877,22 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		moc_predefs.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/bin/moc
-	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/QT/two/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/QT/two/EagleTRT -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
+	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
 
 moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QObject \
@@ -988,6 +1003,9 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qicon.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -995,8 +1013,6 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1014,6 +1030,10 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1022,12 +1042,22 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		moc_predefs.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/bin/moc
-	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/QT/two/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/QT/two/EagleTRT -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
+	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
 
 moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QObject \
@@ -1138,6 +1168,9 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qicon.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1145,8 +1178,6 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1164,6 +1195,10 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1172,12 +1207,22 @@ moc_tabViewer.cpp: Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		moc_predefs.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/bin/moc
-	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/QT/two/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/QT/two/EagleTRT -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
+	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/Pages/tabViewer.h -o moc_tabViewer.cpp
 
 moc_mainwindow.cpp: Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QMainWindow \
@@ -1291,6 +1336,9 @@ moc_mainwindow.cpp: Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QTabWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1298,8 +1346,6 @@ moc_mainwindow.cpp: Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1317,6 +1363,10 @@ moc_mainwindow.cpp: Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1325,12 +1375,22 @@ moc_mainwindow.cpp: Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		moc_predefs.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/bin/moc
-	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/QT/two/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/QT/two/EagleTRT -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers -I/media/filippo/label/Codes/QT/two/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/mainwindow.h -o moc_mainwindow.cpp
+	/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/bin/moc $(DEFINES) --include /media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/moc_predefs.h -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/mkspecs/linux-g++ -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers -I/media/filippo/label/Codes/Github/EagleTRT-CAN-App/EagleTRT/Headers/Pages -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtWidgets -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtGui -I/media/filippo/label/Programmi/Qt/5.12.1/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include Headers/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1353,7 +1413,57 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-Devices.o: Src/Devices.cc Headers/Devices.h
+Devices.o: Src/Devices.cc Headers/Devices.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QObject \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobject.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qflags.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstring.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qchar.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpair.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobject_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Devices.o Src/Devices.cc
 
 tabViewer.o: Src/Pages/tabViewer.cpp Headers/Pages/tabViewer.h \
@@ -1465,6 +1575,9 @@ tabViewer.o: Src/Pages/tabViewer.cpp Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qicon.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1472,8 +1585,6 @@ tabViewer.o: Src/Pages/tabViewer.cpp Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1491,6 +1602,10 @@ tabViewer.o: Src/Pages/tabViewer.cpp Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1499,14 +1614,219 @@ tabViewer.o: Src/Pages/tabViewer.cpp Headers/Pages/tabViewer.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/QtConcurrent \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/QtConcurrentDepends \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QtCore \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QtCoreDepends \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstractanimation.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstractproxymodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstractstate.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qabstracttransition.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qanimationgroup.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbasictimer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbitarray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbuffer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbytearraymatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcache.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcborarray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcborvalue.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdatetime.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcborcommon.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/quuid.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcbormap.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcborstream.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfloat16.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcollator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcommandlineoption.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcommandlineparser.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcryptographichash.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qeasingcurve.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qendian.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qeventtransition.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qexception.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfactoryinterface.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileselector.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QStringList \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfinalstate.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfuture.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qresultstore.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfuturewatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qhistorystate.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qisenum.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qjsonarray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qjsonvalue.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qjsondocument.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qjsonobject.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlibrary.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlibraryinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qversionnumber.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlinkedlist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlockfile.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qloggingcategory.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmath.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmetaobject.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmimedata.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmimedatabase.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmimetype.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpauseanimation.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qplugin.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpointer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpluginloader.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qprocess.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpropertyanimation.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qvariantanimation.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qqueue.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrandom.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qreadwritelock.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qresource.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsavefile.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsemaphore.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsettings.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsharedmemory.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsignalmapper.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsignaltransition.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsocketnotifier.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstack.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstandardpaths.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstate.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstatemachine.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstorageinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringlistmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsystemsemaphore.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtemporarydir.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtextcodec.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthreadpool.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthreadstorage.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtimeline.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtimer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtimezone.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtranslator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qwaitcondition.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qwineventnotifier.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qxmlstream.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtcoreversion.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentcompilertest.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrent_global.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentexception.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentfilter.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentfilterkernel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentiteratekernel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentmedian.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentthreadengine.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentmapkernel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentreducekernel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentfunctionwrappers.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentmap.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentrun.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentrunbase.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentstoredfunctioncall.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtConcurrent/qtconcurrentversion.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QApplication \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QColumnView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcolumnview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDateTime \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QFuture \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QTableWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QTimer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tabViewer.o Src/Pages/tabViewer.cpp
 
-Parser.o: Src/Parser.cc Headers/Parser.h
+Parser.o: Src/Parser.cc Headers/Parser.h \
+		Headers/Devices.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QObject \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobject.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qflags.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstring.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qchar.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qlist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qpair.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Parser.o Src/Parser.cc
 
 main.o: Src/main.cpp Headers/mainwindow.h \
@@ -1621,6 +1941,9 @@ main.o: Src/main.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QTabWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1628,8 +1951,6 @@ main.o: Src/main.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1647,6 +1968,10 @@ main.o: Src/main.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1655,9 +1980,19 @@ main.o: Src/main.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QApplication \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1779,6 +2114,9 @@ mainwindow.o: Src/mainwindow.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QTabWidget \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QDebug \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QSlider \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QComboBox \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1786,8 +2124,6 @@ mainwindow.o: Src/mainwindow.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtGui/qvalidator.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qrubberband.h \
@@ -1805,6 +2141,10 @@ mainwindow.o: Src/mainwindow.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListView \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qscrollbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1813,9 +2153,19 @@ mainwindow.o: Src/mainwindow.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdir.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qfileinfo.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QFileSystemModel \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qfilesystemmodel.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qdiriterator.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QRunnable \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qrunnable.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QThread \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/qthread.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		Headers/Devices.h \
+		Headers/Parser.h \
 		ui_mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtCore/QVariant \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QApplication \
@@ -1833,8 +2183,10 @@ mainwindow.o: Src/mainwindow.cpp Headers/mainwindow.h \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QHeaderView \
 		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QProgressBar \
-		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qprogressbar.h
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QTableWidget \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Programmi/Qt/5.12.1/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o Src/mainwindow.cpp
 
 moc_tabViewer.o: moc_tabViewer.cpp 
